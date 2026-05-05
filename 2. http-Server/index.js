@@ -10,29 +10,32 @@ const server = http.createServer((req, res) => {
         switch (path) {
           case "/":
             {
-              res.writeHead(200).end("Hello! Welcome to the server.");
+              return res.writeHead(200).end("Hello! Welcome to the server.");
             }
 
             break;
 
-          case "/contact-us":
-            {
-              res
-                .writeHead(200)
-                .end("Contact us through email, example@gmail.com");
-            }
+          case "/contact-us": {
+            res
+              .writeHead(200)
+              .end("Contact us through email, example@gmail.com");
+          }
+          case "/tweet":
+            return res.writeHead(200).end("Retriving tweets");
 
             break;
         }
       }
       break;
-    case "POST":
-      {
+    case "POST": {
+      switch (path) {
+        case "/tweet":
+          return res.writeHead(201).end("Your tweet has been posted");
       }
-      break;
-    default: {
     }
   }
+
+  res.writeHead(404).end("Not found");
 });
 
 server.listen(8000, function () {
