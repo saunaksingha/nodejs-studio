@@ -1,0 +1,24 @@
+{
+  "name": "nodeprojects",
+  "version": "1.0.0",
+  "description": "A structured development workspace for building and experimenting with Node.js.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch /index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saunaksingha/nodejs-studio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/saunaksingha/nodejs-studio/issues"
+  },
+  "homepage": "https://github.com/saunaksingha/nodejs-studio#readme",
+  "dependencies": {
+    "@types/node": "^25.6.0"
+  }
+}
