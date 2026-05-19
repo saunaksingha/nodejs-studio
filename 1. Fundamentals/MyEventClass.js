@@ -2,7 +2,6 @@ const EventEmitter = require("events");
 
 class Chat extends EventEmitter {
   sendMessage(message) {
-    console.log("Testing");
     console.log(`Sending message ${message}`);
     this.emit("sendMessage", message);
   }
