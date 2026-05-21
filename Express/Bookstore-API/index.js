@@ -38,10 +38,26 @@ app.post("/books", (req, res) => {
       ._construct.json({ error: "Title & Author are required" });
   }
 
-  console.log(title);
-  const book = { id: books.length, title, author };
+  const book = { id: books.length + 1, title: title, author: author };
   books.push(book);
-  res.json({ message: "Books created successfully" });
+  res.status(201).json({ message: "Books created successfully" });
+});
+
+app.delete("/books/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  if (isNaN(id)) {
+    return res.status(400).json({ error: "I'd must be of type number" });
+  }
+  const bookIndexToDelete = books.findIndex((e) => e.id === id);
+
+  if (bookIndexToDelete < 0) {
+    return res.status(404).json({ error: `id ${id} doesn't exists` });
+  }
+
+  books.splice(bookIndexToDelete, 1);
+
+  return res.status(200).json({ message: "Book deleted successfully" });
 });
 app.listen(PORT, () => {
   console.log("Server is running on port 8000");
