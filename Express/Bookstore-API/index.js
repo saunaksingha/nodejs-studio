@@ -12,6 +12,8 @@ app.get("/books", (req, res) => {
   res.json(books);
 });
 
+app.use(express.json());
+
 app.get("/books/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
@@ -25,6 +27,21 @@ app.get("/books/:id", (req, res) => {
   } else {
     res.json(book);
   }
+});
+
+app.post("/books", (req, res) => {
+  const { title, author } = req.body;
+
+  if (!title || !author || title === "" || author === "") {
+    return res
+      .status(400)
+      ._construct.json({ error: "Title & Author are required" });
+  }
+
+  console.log(title);
+  const book = { id: books.length, title, author };
+  books.push(book);
+  res.json({ message: "Books created successfully" });
 });
 app.listen(PORT, () => {
   console.log("Server is running on port 8000");
