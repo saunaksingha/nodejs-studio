@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 
 const app = express();
 const PORT = 8000;
@@ -8,11 +9,19 @@ const books = [
   { id: 2, title: "Book Two", author: "Author Two" },
 ];
 
+app.use(express.json());
+
+app.use((req, res, next) => {
+  const log = `\n${Date.now()}-${req.method}-${req.path}`;
+  fs.appendFileSync("logs.txt", log, "utf-8");
+  next();
+});
+
+//Routes
+
 app.get("/books", (req, res) => {
   res.json(books);
 });
-
-app.use(express.json());
 
 app.get("/books/:id", (req, res) => {
   const id = parseInt(req.params.id);
